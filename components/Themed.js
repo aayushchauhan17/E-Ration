@@ -19,14 +19,14 @@ export function useThemeColor(props, colorName) {
   }
 }
 
-export function Text(props) {
+function Text(props) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
 
-export function View(props) {
+function View(props) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
