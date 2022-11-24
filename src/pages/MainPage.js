@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView } from "react-native";
+import { Image, SafeAreaView, View } from "react-native";
 import {
   ButtonContainer,
+  HeaderTop,
   ImageContainer,
   ImageDot,
   MainContainer,
@@ -9,6 +10,7 @@ import {
 import { imageComp } from "../assets/ImageComp";
 import Entypo from "react-native-vector-icons/Entypo";
 import ButtonCustom from "../components/ButtonCustom";
+import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 
 function MainPage() {
   const [imageSelect, setImageSelect] = useState(1);
@@ -22,8 +24,18 @@ function MainPage() {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        paddingHorizontal: 0,
+        paddingVertical: 0,
+        marginHorizontal: 0,
+        marginVertical: 0,
+        backgroundColor: "white",
+      }}
+    >
       <MainContainer>
+        <HeaderTop></HeaderTop>
+        <HeaderMainPage />
         <ImageContainer>
           <Image source={imageComp[`${imageSelect + 1}`]} />
         </ImageContainer>

@@ -26,14 +26,7 @@ function RootNavigator() {
       <Stack.Screen
         name="MainPage"
         options={{
-          title: "E-Ration",
-          headerLeft: () => (
-            <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => {}}>
-              <Text>
-                <Ionicons size={26} name="ios-menu" />
-              </Text>
-            </TouchableOpacity>
-          ),
+          headerShown: false,
         }}
         component={MainPage}
       />

@@ -27,3 +27,11 @@ export const ImageDot = styled(View, {
 export const ButtonContainer = styled(View, {
   alignItems: "center",
 });
+
+export const HeaderTop = styled(View, {
+  backgroundColor: "#eee",
+  width: "100%",
+  height: 100,
+  position: "absolute",
+  top: -80,
+});
