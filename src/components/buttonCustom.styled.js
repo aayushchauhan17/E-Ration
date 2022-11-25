@@ -1,17 +1,14 @@
-import { Text, View } from "react-native";
-import styled from "react-native-styled-components";
+import styled from "styled-components/native";
 
-export const ButtonContainer = styled(View, {
-  width: (prop) => prop?.width,
-  backgroundColor: "#6CB4EE",
-  paddingHorizontal: 5,
-  paddingVertical: 8,
-  borderRadius: 5,
-  ...(prop) => prop.customCss,
-});
+export const ButtonContainer = styled.View`
+  background-color: #bdd4f1;
+  padding: 8px 5px;
+  border-radius: 5px;
+  ${(prop) => prop.customCss};
+`;
 
-export const ButtonText = styled(Text, {
-  fontSize: 24,
-  color: "white",
-  fontWeight: "500",
-});
+export const ButtonText = styled.Text`
+  font-size: 24px;
+  color: white;
+  font-weight: 500;
+`;

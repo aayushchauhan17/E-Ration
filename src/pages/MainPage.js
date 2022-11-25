@@ -27,10 +27,6 @@ function MainPage() {
   return (
     <SafeAreaView
       style={{
-        paddingHorizontal: 0,
-        paddingVertical: 0,
-        marginHorizontal: 0,
-        marginVertical: 0,
         backgroundColor: "white",
       }}
     >
@@ -56,10 +52,9 @@ function MainPage() {
           <ButtonCustom
             style={{ marginBottom: 30, marginTop: 20 }}
             title="Customer Login"
-            width={182}
             onClick={() => {}}
           />
-          <ButtonCustom title="Employee Login" width={183} onClick={() => {}} />
+          <ButtonCustom title="Employee Login" onClick={() => {}} />
         </ButtonContainer>
       </MainContainer>
     </SafeAreaView>

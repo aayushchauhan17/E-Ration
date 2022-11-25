@@ -38,10 +38,11 @@ export const HeaderTop = styled.View`
 export const ImgContainer = styled.View`
   background-color: #eee;
   width: 100%;
-  padding-top: 8;
+  padding-top: 8px;
   width: 96%;
   align-self: center;
   border-radius: 8px;
+  margin-top: -10px;
 `;
 
 export const ImageBar = styled.View`
