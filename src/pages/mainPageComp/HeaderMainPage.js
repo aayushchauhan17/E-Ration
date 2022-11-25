@@ -32,7 +32,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "relative",
-    top: -20,
+    top: -15,
   },
   menu: {
     marginLeft: 5,

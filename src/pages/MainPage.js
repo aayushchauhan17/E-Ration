@@ -3,12 +3,13 @@ import { Image, SafeAreaView, View } from "react-native";
 import {
   ButtonContainer,
   HeaderTop,
+  ImageBar,
   ImageContainer,
   ImageDot,
+  ImgContainer,
   MainContainer,
-} from "./mainPage.style";
+} from "./mainPageComp/mainPage.style";
 import { imageComp } from "../assets/ImageComp";
-import Entypo from "react-native-vector-icons/Entypo";
 import ButtonCustom from "../components/ButtonCustom";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 
@@ -34,23 +35,23 @@ function MainPage() {
       }}
     >
       <MainContainer>
-        <HeaderTop></HeaderTop>
+        <HeaderTop />
         <HeaderMainPage />
-        <ImageContainer>
-          <Image source={imageComp[`${imageSelect + 1}`]} />
-        </ImageContainer>
-        <ImageDot>
-          <Entypo
-            style={{ color: imageSelect === 0 ? "#777" : "white" }}
-            size={24}
-            name="dot-single"
-          />
-          <Entypo
-            style={{ color: imageSelect === 1 ? "#777" : "white" }}
-            size={24}
-            name="dot-single"
-          />
-        </ImageDot>
+        <ImgContainer>
+          <ImageContainer>
+            <Image source={imageComp[`${imageSelect + 1}`]} />
+          </ImageContainer>
+          <ImageDot>
+            <ImageBar
+              color={imageSelect === 0 ? "#777" : "white"}
+              isSelected={imageSelect === 0}
+            />
+            <ImageBar
+              color={imageSelect === 1 ? "#777" : "white"}
+              isSelected={imageSelect === 1}
+            />
+          </ImageDot>
+        </ImgContainer>
         <ButtonContainer>
           <ButtonCustom
             style={{ marginBottom: 30, marginTop: 20 }}
