@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 
 export const MainContainer = styled.View`
   margin-top: 20px;
+  height: 100%;
 `;
 
 export const ImageContainer = styled.View`
@@ -53,4 +54,8 @@ export const ImageBar = styled.View`
   align-self: center;
   margin-left: 5px;
   margin-right: 5px;
+`;
+
+export const StackView = styled.View`
+  margin-top: 20px;
 `;

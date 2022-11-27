@@ -1,11 +1,9 @@
-import { Ionicons } from "@expo/vector-icons";
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Text, TouchableOpacity } from "react-native";
 import MainPage from "../src/pages/MainPage";
 
 export default function Navigation({ colorScheme }) {
