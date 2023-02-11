@@ -7,7 +7,7 @@ function TextField({
   label,
   type,
   placeholder = "",
-  error,
+  error = "",
 }) {
   return (
     <View style={style.container}>
@@ -19,8 +19,9 @@ function TextField({
         placeholder={placeholder}
         keyboardType={type}
         error={error}
+        placeholderTextColor="#777"
       />
-      {error && <Text style={style.error}>Error</Text>}
+      {error && <Text style={style.error}>{error}</Text>}
     </View>
   );
 }
@@ -43,6 +44,7 @@ const style = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     fontSize: 16,
+    color: "#77777",
   },
   label: {
     marginLeft: "2%",

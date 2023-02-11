@@ -12,6 +12,7 @@ export const ImageContainer = styled.View`
   height: 200px;
   overflow: hidden;
   border-radius: 4px;
+  margin-top: 10px;
 `;
 
 export const ImageDot = styled.View`
@@ -56,6 +57,9 @@ export const ImageBar = styled.View`
   margin-right: 5px;
 `;
 
-export const StackView = styled.View`
-  margin-top: 20px;
+export const StackView = styled.ScrollView`
+  /* margin-top: 20px; */
+  background-color: #fff;
+  height: 100%;
+  padding: 0px;
 `;

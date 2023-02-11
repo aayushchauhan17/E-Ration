@@ -46,7 +46,12 @@ function MainPageContent({ navigation }) {
             navigation.navigate("loginPage");
           }}
         />
-        <ButtonCustom title="Employee Login" onClick={() => {}} />
+        <ButtonCustom
+          title="Employee Login"
+          onClick={() => {
+            navigation.navigate("loginPage");
+          }}
+        />
       </ButtonContainer>
     </StackView>
   );

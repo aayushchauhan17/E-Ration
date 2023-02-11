@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const ButtonContainer = styled.View`
   min-width: 80px;
-  background-color: #bdd4f1;
+  background-color: #0280fa;
   padding: 8px 10px;
   border-radius: 5px;
   ${(prop) => prop.customCss};
