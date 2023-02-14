@@ -5,6 +5,7 @@ import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import MainPageContent from "./mainPageComp/MainPageContent";
 import LoginPage from "./LoginPage";
 import { createStackNavigator } from "@react-navigation/stack";
+import EmployeeLoginPage from "./EmployeeLoginPage";
 
 function MainPage() {
   const MainPageStack = createStackNavigator();
@@ -22,6 +23,10 @@ function MainPage() {
         <MainPageStack.Navigator screenOptions={{ headerShown: false }}>
           <MainPageStack.Screen name="home" component={MainPageContent} />
           <MainPageStack.Screen name="loginPage" component={LoginPage} />
+          <MainPageStack.Screen
+            name="employeeLoginPage"
+            component={EmployeeLoginPage}
+          />
         </MainPageStack.Navigator>
       </MainContainer>
     </SafeAreaView>

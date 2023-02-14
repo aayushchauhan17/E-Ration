@@ -49,7 +49,7 @@ function MainPageContent({ navigation }) {
         <ButtonCustom
           title="Employee Login"
           onClick={() => {
-            navigation.navigate("loginPage");
+            navigation.navigate("employeeLoginPage");
           }}
         />
       </ButtonContainer>
