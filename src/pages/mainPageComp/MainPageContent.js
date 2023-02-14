@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { imageComp } from "../../assets/ImageComp";
 import ButtonCustom from "../../components/ButtonCustom";
+import { HeaderMainPage } from "./HeaderMainPage";
 import {
   ButtonContainer,
+  HeaderTop,
   ImageBar,
   ImageContainer,
   ImageDot,
@@ -14,6 +16,8 @@ import {
 function MainPageContent({ navigation }) {
   const [imageSelect, setImageSelect] = useState(1);
 
+  console.log(navigation);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setImageSelect((prev) => (prev + 1) % 2);
@@ -23,6 +27,11 @@ function MainPageContent({ navigation }) {
   }, []);
   return (
     <StackView>
+      {/* Top Header ======> */}
+      <HeaderTop />
+      <HeaderMainPage navigation={navigation} />
+      {/* =======> */}
+
       <ImgContainer>
         <ImageContainer>
           <Image source={imageComp[`${imageSelect + 1}`]} />

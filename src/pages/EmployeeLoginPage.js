@@ -2,8 +2,10 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
+import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
+import { HeaderTop } from "./mainPageComp/mainPage.style";
 
-function EmployeeLoginPage() {
+function EmployeeLoginPage({ navigation }) {
   const [userData, setUserData] = useState({
     mobileNo: "",
   });
@@ -11,38 +13,44 @@ function EmployeeLoginPage() {
     mobileNoError: "",
   });
   return (
-    <View style={style.container}>
-      <View style={style.content}>
-        <Text style={style.loginText}>Costumer Login</Text>
-        <TextField
-          label="Mobile Number"
-          type="numeric"
-          placeholder="Mobile No."
-          error={error.mobileNoError}
-          value={userData.mobileNo}
-          onChange={(e) => {
-            if (+e.length <= 10)
-              setUserData((prev) => {
-                return { ...prev, mobileNo: e };
-              });
-          }}
-        />
-        <ButtonCustom
-          style={{ marginBottom: 20, marginTop: 10 }}
-          title="Login"
-          onClick={() => {
-            if (userData.mobileNo.length < 10) {
-              setError((prev) => {
-                return {
-                  ...prev,
-                  mobileNoError: "Enter the 10 digit Mobile no.",
-                };
-              });
-            }
-          }}
-        />
+    <>
+      {/* Top Header ======> */}
+      <HeaderTop />
+      <HeaderMainPage navigation={navigation} />
+      {/* =======> */}
+      <View style={style.container}>
+        <View style={style.content}>
+          <Text style={style.loginText}>Costumer Login</Text>
+          <TextField
+            label="Mobile Number"
+            type="numeric"
+            placeholder="Mobile No."
+            error={error.mobileNoError}
+            value={userData.mobileNo}
+            onChange={(e) => {
+              if (+e.length <= 10)
+                setUserData((prev) => {
+                  return { ...prev, mobileNo: e };
+                });
+            }}
+          />
+          <ButtonCustom
+            style={{ marginBottom: 20, marginTop: 10 }}
+            title="Login"
+            onClick={() => {
+              if (userData.mobileNo.length < 10) {
+                setError((prev) => {
+                  return {
+                    ...prev,
+                    mobileNoError: "Enter the 10 digit Mobile no.",
+                  };
+                });
+              }
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

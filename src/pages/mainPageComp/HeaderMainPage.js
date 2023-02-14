@@ -9,13 +9,18 @@ import {
 } from "react-native";
 import { imageComp } from "../../assets/ImageComp";
 
-export function HeaderMainPage() {
+export function HeaderMainPage({ navigation }) {
   return (
     <View style={style.container}>
-      <TouchableOpacity style={style.personIcon}>
-        <View>
-          <Ionicons size={26} name="ios-person-outline" />
-        </View>
+      <TouchableOpacity
+        style={style.personIcon}
+        onPress={() => {
+          navigation.openDrawer();
+        }}
+      >
+        <Text>
+          <Ionicons size={30} name="ios-menu" />
+        </Text>
       </TouchableOpacity>
 
       <View style={style.imageContainer}>
@@ -23,10 +28,10 @@ export function HeaderMainPage() {
         <Text style={style.rationText}>E-Ration</Text>
       </View>
 
-      <TouchableOpacity style={style.menu} onPress={() => {}}>
-        <Text>
-          <Ionicons size={30} name="ios-menu" />
-        </Text>
+      <TouchableOpacity style={style.menu}>
+        <View>
+          <Ionicons size={26} name="ios-person-outline" />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -35,13 +40,13 @@ export function HeaderMainPage() {
 const style = StyleSheet.create({
   container: {
     display: "flex",
-    backgroundColor: "#eee",
-    height: 65,
-    marginBottom: 10,
+    backgroundColor: "#fff",
+    height: 75,
+    paddingBottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     position: "relative",
-    top: Platform.OS === "android" ? 20 : -13,
+    top: Platform.OS === "android" ? 20 : -0,
   },
   menu: {
     alignSelf: "center",

@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 export const MainContainer = styled.View`
-  margin-top: 20px;
+  /* margin-top: 20px; */
   height: 100%;
 `;
 
@@ -30,7 +30,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const HeaderTop = styled.View`
-  background-color: #eee;
+  background-color: #fff;
   width: 100%;
   height: 100px;
   position: absolute;
