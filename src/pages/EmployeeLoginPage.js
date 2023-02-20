@@ -25,9 +25,11 @@ function EmployeeLoginPage({ navigation }) {
             label="Mobile Number"
             type="numeric"
             placeholder="Mobile No."
+            disable={+userData.mobileNo.length > 10}
             error={error.mobileNoError}
             value={userData.mobileNo}
             onChange={(e) => {
+              console.log(e);
               if (+e.length <= 10)
                 setUserData((prev) => {
                   return { ...prev, mobileNo: e };
@@ -74,6 +76,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     paddingVertical: 10,
+    justifyContent: "space-around",
   },
   loginText: {
     fontSize: 26,

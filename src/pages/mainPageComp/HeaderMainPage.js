@@ -46,7 +46,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "relative",
-    top: Platform.OS === "android" ? 20 : -0,
+    top: Platform.OS === "android" ? 20 : 0,
   },
   menu: {
     alignSelf: "center",

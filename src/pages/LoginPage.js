@@ -22,7 +22,7 @@ function LoginPage({ navigation }) {
       {/* =======> */}
       <View style={style.container}>
         <View style={style.content}>
-          <Text style={style.loginText}>Costumer Login</Text>
+          <Text style={style.loginText}>Customer Login</Text>
           <TextField
             label="Aadhaar Card"
             type="numeric"

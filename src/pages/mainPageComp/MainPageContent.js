@@ -16,8 +16,6 @@ import {
 function MainPageContent({ navigation }) {
   const [imageSelect, setImageSelect] = useState(1);
 
-  console.log(navigation);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setImageSelect((prev) => (prev + 1) % 2);

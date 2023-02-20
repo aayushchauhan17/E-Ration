@@ -8,18 +8,23 @@ function TextField({
   type,
   placeholder = "",
   error = "",
+  disable = "false",
 }) {
   return (
     <View style={style.container}>
       {label && <Text style={style.label}>{label} :</Text>}
       <CustomInput
         style={style.inputBox}
-        onChangeText={onChange}
+        onChangeText={(e) => {
+          onChange && onChange(e);
+        }}
         value={value}
         placeholder={placeholder}
         keyboardType={type}
         error={error}
         placeholderTextColor="#777"
+        disable={disable}
+        TextInput={disable}
       />
       {error && <Text style={style.error}>{error}</Text>}
     </View>
@@ -31,9 +36,9 @@ export default TextField;
 const style = StyleSheet.create({
   container: {
     width: "100%",
-    marginVertical: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    marginVertical: 3,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
   },
   inputBox: {
     width: "96%",

@@ -7,6 +7,8 @@ import LoginPage from "./LoginPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import EmployeeLoginPage from "./EmployeeLoginPage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import FillUserData from "./FillUserData";
+import FillEmployeeData from "./FillEmployeeData";
 
 function MainPage() {
   const Drawer = createDrawerNavigator();
@@ -15,20 +17,22 @@ function MainPage() {
     {
       name: "home",
       Name: "Home",
-      iconType: "Material",
-      iconName: "face-profile",
     },
     {
       name: "loginPage",
-      Name: "Login",
-      iconType: "Feather",
-      iconName: "settings",
+      Name: "Customer Login",
     },
     {
       name: "employeeLoginPage",
       Name: "Employee Login",
-      iconType: "Material",
-      iconName: "bookmark-check-outline",
+    },
+    {
+      name: "createNewCustomer",
+      Name: "Create New Customer ",
+    },
+    {
+      name: "createNewEmployee",
+      Name: "Create New Employee ",
     },
   ];
 
@@ -76,6 +80,10 @@ function MainPage() {
                   ? LoginPage
                   : drawer.name === "employeeLoginPage"
                   ? EmployeeLoginPage
+                  : drawer.name === "createNewCustomer"
+                  ? FillUserData
+                  : drawer.name === "createNewEmployee"
+                  ? FillEmployeeData
                   : MainPageContent
               }
             />
