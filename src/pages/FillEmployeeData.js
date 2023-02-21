@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
+import DatePicker from "react-native-datepicker";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
 import { employeeDataSchema } from "./data/schemaData";
@@ -18,7 +19,32 @@ function FillUserData({ navigation }) {
           <View style={style.content}>
             {/* Schema====> */}
             {employeeDataSchema.map((schema, idx) => {
-              return (
+              return schema.type === "date" ? (
+                <DatePicker
+                  key={idx}
+                  style={style.datePickerStyle}
+                  date={date}
+                  mode="date"
+                  placeholder="select date"
+                  format="DD-MM-YYYY"
+                  // minDate="01-01-2016"
+                  // maxDate="01-01-2019"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateIcon: {
+                      position: "absolute",
+                      left: 0,
+                      top: 4,
+                      marginLeft: 0,
+                    },
+                    dateInput: {
+                      marginLeft: 36,
+                    },
+                  }}
+                  onDateChange={() => {}}
+                />
+              ) : (
                 <TextField
                   key={idx}
                   label={schema.label}

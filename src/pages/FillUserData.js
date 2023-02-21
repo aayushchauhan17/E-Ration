@@ -4,8 +4,23 @@ import TextField from "../components/TextField";
 import { customerDataSchema } from "./data/schemaData";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
+import { useState } from "react";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
+import { useEffect } from "react";
 
 function FillUserData({ navigation }) {
+  const [newCustomerData, setNewCustomerData] = useState({
+    fullName: "",
+    fatherHusbandName: "",
+    aadhaarCard: "",
+    dob: "",
+    address1: "",
+    address2: "",
+    pinCode: "",
+    mobileNo: "",
+  });
+  console.log(newCustomerData);
+  const [date, setDate] = useState(new Date());
   return (
     <>
       {/* Top Header ======> */}
@@ -18,12 +33,32 @@ function FillUserData({ navigation }) {
           <View style={style.content}>
             {/* Schema====> */}
             {customerDataSchema.map((schema, idx) => {
-              return (
+              return schema.type === "date" ? (
+                <View style={style.datePickerStyle}>
+                  <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
+                  <RNDateTimePicker
+                    key={idx}
+                    value={date}
+                    onDateChange={setDate}
+                    positiveButton={{ label: "OK", textColor: "green" }}
+                    themeVariant="light"
+                    display="default"
+                  />
+                </View>
+              ) : (
                 <TextField
                   key={idx}
                   label={schema.label}
                   type={schema.type}
                   placeholder={schema.placeholder}
+                  value={newCustomerData[schema?.key]}
+                  onChange={(e) => {
+                    setNewCustomerData((prev) => {
+                      let temp = {};
+                      temp[schema.key] = e;
+                      return { ...prev, ...temp };
+                    });
+                  }}
                 />
               );
             })}
@@ -71,5 +106,13 @@ const style = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  datePickerStyle: {
+    width: "92%",
+    marginVertical: 5,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
