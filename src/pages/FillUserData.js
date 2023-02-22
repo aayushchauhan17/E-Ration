@@ -4,11 +4,33 @@ import TextField from "../components/TextField";
 import { customerDataSchema } from "./data/schemaData";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
-import { useState } from "react";
+import React, { useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
+import { mobileValitaion } from "../Validations";
+import { useEffect } from "react";
+import { KeyboardAvoidingView } from "react-native";
 
 function FillUserData({ navigation }) {
+  const inputRef = React.useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+  }, []);
+
   const [newCustomerData, setNewCustomerData] = useState({
+    fullName: "",
+    fatherHusbandName: "",
+    aadhaarCard: "",
+    dob: "",
+    address1: "",
+    address2: "",
+    pinCode: "",
+    mobileNo: "",
+  });
+
+  const [error, setError] = useState({
     fullName: "",
     fatherHusbandName: "",
     aadhaarCard: "",
@@ -27,17 +49,16 @@ function FillUserData({ navigation }) {
       <HeaderTop />
       <HeaderMainPage navigation={navigation} />
       {/* =======> */}
-      <View style={style.container}>
+      <KeyboardAvoidingView behavior="padding" style={style.container}>
         <ScrollView contentContainerStyle={style.scrollView} width="100%">
           <Text style={style.loginText}>Create New Customer</Text>
           <View style={style.content}>
             {/* Schema====> */}
             {customerDataSchema.map((schema, idx) => {
               return schema.type === "date" ? (
-                <View style={style.datePickerStyle}>
+                <View key={idx} style={style.datePickerStyle}>
                   <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
                   <RNDateTimePicker
-                    key={idx}
                     value={date}
                     onDateChange={setDate}
                     positiveButton={{ label: "OK", textColor: "green" }}
@@ -48,10 +69,12 @@ function FillUserData({ navigation }) {
               ) : (
                 <TextField
                   key={idx}
+                  ref={inputRef}
                   label={schema.label}
                   type={schema.type}
                   placeholder={schema.placeholder}
                   value={newCustomerData[schema?.key]}
+                  error={error[schema?.key]}
                   onChange={(e) => {
                     setNewCustomerData((prev) => {
                       let temp = {};
@@ -67,11 +90,20 @@ function FillUserData({ navigation }) {
             <ButtonCustom
               style={{ marginBottom: 20, marginTop: 10 }}
               title="Create"
-              onClick={() => {}}
+              onClick={() => {
+                if (!mobileValitaion(newCustomerData?.mobileNo)) {
+                  setError((prev) => {
+                    return {
+                      ...prev,
+                      mobileNo: "Please enter the 10 digit No",
+                    };
+                  });
+                }
+              }}
             />
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     </>
   );
 }

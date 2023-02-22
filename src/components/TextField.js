@@ -9,6 +9,7 @@ function TextField({
   placeholder = "",
   error = "",
   disable = "false",
+  ref = () => {},
 }) {
   return (
     <View style={style.container}>
@@ -18,6 +19,7 @@ function TextField({
         onChangeText={(e) => {
           onChange && onChange(e);
         }}
+        ref={ref}
         value={value}
         placeholder={placeholder}
         keyboardType={type}

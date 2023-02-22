@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { KeyboardAvoidingView } from "react-native";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
 import ButtonCustom from "../components/ButtonCustom";
@@ -24,7 +25,7 @@ function FillUserData({ navigation }) {
       <HeaderTop />
       <HeaderMainPage navigation={navigation} />
       {/* =======> */}
-      <View style={style.container}>
+      <KeyboardAvoidingView behavior="padding" style={style.container}>
         <ScrollView contentContainerStyle={style.scrollView} width="100%">
           <Text style={style.loginText}>Create New Employee</Text>
           <View style={style.content}>
@@ -56,7 +57,7 @@ function FillUserData({ navigation }) {
             />
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     </>
   );
 }
