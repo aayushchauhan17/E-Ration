@@ -6,7 +6,6 @@ import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 import { useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { useEffect } from "react";
 
 function FillUserData({ navigation }) {
   const [newCustomerData, setNewCustomerData] = useState({
@@ -19,8 +18,9 @@ function FillUserData({ navigation }) {
     pinCode: "",
     mobileNo: "",
   });
-  console.log(newCustomerData);
+
   const [date, setDate] = useState(new Date());
+
   return (
     <>
       {/* Top Header ======> */}

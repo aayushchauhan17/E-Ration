@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
 import ButtonCustom from "../components/ButtonCustom";
@@ -7,6 +8,16 @@ import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 
 function FillUserData({ navigation }) {
+  const [newEmployeeData, setNewEmployeeData] = useState({
+    fullName: "",
+    aadhaarCard: "",
+    dob: "",
+    address1: "",
+    address2: "",
+    pinCode: "",
+    mobileNo: "",
+  });
+
   return (
     <>
       {/* Top Header ======> */}
@@ -19,37 +30,20 @@ function FillUserData({ navigation }) {
           <View style={style.content}>
             {/* Schema====> */}
             {employeeDataSchema.map((schema, idx) => {
-              return schema.type === "date" ? (
-                <DatePicker
-                  key={idx}
-                  style={style.datePickerStyle}
-                  date={date}
-                  mode="date"
-                  placeholder="select date"
-                  format="DD-MM-YYYY"
-                  // minDate="01-01-2016"
-                  // maxDate="01-01-2019"
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateIcon: {
-                      position: "absolute",
-                      left: 0,
-                      top: 4,
-                      marginLeft: 0,
-                    },
-                    dateInput: {
-                      marginLeft: 36,
-                    },
-                  }}
-                  onDateChange={() => {}}
-                />
-              ) : (
+              return (
                 <TextField
                   key={idx}
                   label={schema.label}
                   type={schema.type}
                   placeholder={schema.placeholder}
+                  value={newEmployeeData[schema?.key]}
+                  onChange={(e) => {
+                    setNewEmployeeData((prev) => {
+                      let temp = {};
+                      temp[schema.key] = e;
+                      return { ...prev, ...temp };
+                    });
+                  }}
                 />
               );
             })}
