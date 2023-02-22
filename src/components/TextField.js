@@ -9,7 +9,7 @@ function TextField({
   placeholder = "",
   error = "",
   disable = "false",
-  ref = () => {},
+  maxValue = "",
 }) {
   return (
     <View style={style.container}>
@@ -19,8 +19,8 @@ function TextField({
         onChangeText={(e) => {
           onChange && onChange(e);
         }}
-        ref={ref}
         value={value}
+        maxLength={maxValue}
         placeholder={placeholder}
         keyboardType={type}
         error={error}

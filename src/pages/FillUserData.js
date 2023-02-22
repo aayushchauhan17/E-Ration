@@ -42,6 +42,9 @@ function FillUserData({ navigation }) {
   });
 
   const [date, setDate] = useState(new Date());
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   return (
     <>
@@ -56,22 +59,41 @@ function FillUserData({ navigation }) {
             {/* Schema====> */}
             {customerDataSchema.map((schema, idx) => {
               return schema.type === "date" ? (
-                <View key={idx} style={style.datePickerStyle}>
-                  <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
-                  <RNDateTimePicker
-                    value={date}
-                    onDateChange={setDate}
-                    positiveButton={{ label: "OK", textColor: "green" }}
-                    themeVariant="light"
-                    display="default"
-                  />
-                </View>
+                <>
+                  <View key={idx} style={style.datePickerStyle}>
+                    <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
+                    <RNDateTimePicker
+                      value={date}
+                      onChange={(e, value) => {
+                        setDate(value);
+                      }}
+                      mode="date"
+                      dateFormat="dayofweek day month"
+                      maximumDate={new Date()}
+                      positiveButton={{ label: "OK", textColor: "green" }}
+                      themeVariant="light"
+                      display="default"
+                    />
+                  </View>
+                  {error?.dob && (
+                    <Text style={{ color: "red", textAlign: "left" }}>
+                      {error.dob}
+                    </Text>
+                  )}
+                </>
               ) : (
                 <TextField
                   key={idx}
                   ref={inputRef}
                   label={schema.label}
                   type={schema.type}
+                  maxValue={
+                    schema.key === "mobileNo"
+                      ? 10
+                      : schema.key === "aadhaarCard"
+                      ? 12
+                      : 30
+                  }
                   placeholder={schema.placeholder}
                   value={newCustomerData[schema?.key]}
                   error={error[schema?.key]}
@@ -116,6 +138,18 @@ function FillUserData({ navigation }) {
                     };
                   });
                 }
+
+                Object.keys(newCustomerData)?.map((dataKey) => {
+                  if (dataKey !== "aadhaarCard" || dataKey !== "mobileNo") {
+                    if (newCustomerData[dataKey] === "") {
+                      setError((prev) => {
+                        let temp = {};
+                        temp[dataKey] = "This field is required.";
+                        return { ...prev, ...temp };
+                      });
+                    }
+                  }
+                });
               }}
             />
           </View>
