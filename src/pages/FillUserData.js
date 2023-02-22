@@ -6,7 +6,7 @@ import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 import React, { useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { mobileValitaion } from "../Validations";
+import { aadhaarCardValidation, mobileValitaion } from "../Validations";
 import { useEffect } from "react";
 import { KeyboardAvoidingView } from "react-native";
 
@@ -76,6 +76,15 @@ function FillUserData({ navigation }) {
                   value={newCustomerData[schema?.key]}
                   error={error[schema?.key]}
                   onChange={(e) => {
+                    if (error[schema?.key]) {
+                      if (e !== newCustomerData[schema?.key]) {
+                        setError((prev) => {
+                          let temp = {};
+                          temp[schema.key] = "";
+                          return { ...prev, ...temp };
+                        });
+                      }
+                    }
                     setNewCustomerData((prev) => {
                       let temp = {};
                       temp[schema.key] = e;
@@ -96,6 +105,14 @@ function FillUserData({ navigation }) {
                     return {
                       ...prev,
                       mobileNo: "Please enter the 10 digit No",
+                    };
+                  });
+                }
+                if (!aadhaarCardValidation(newCustomerData.aadhaarCard)) {
+                  setError((prev) => {
+                    return {
+                      ...prev,
+                      aadhaarCard: "Please enter valid Aadhaar Card No",
                     };
                   });
                 }

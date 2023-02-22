@@ -3,7 +3,15 @@ export const mobileValitaion = (number) => {
     return false;
   } else {
     var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    console.log(re.test(number));
     return re.test(number);
+  }
+};
+
+export const aadhaarCardValidation = (number) => {
+  if (number < 12 || number > 12 || number === "") {
+    return false;
+  } else {
+    var re = /^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/;
+    return re.text(number);
   }
 };
