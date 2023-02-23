@@ -11,14 +11,6 @@ import { useEffect } from "react";
 import { KeyboardAvoidingView } from "react-native";
 
 function FillUserData({ navigation }) {
-  const inputRef = React.useRef();
-
-  useEffect(() => {
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
-  }, []);
-
   const [newCustomerData, setNewCustomerData] = useState({
     fullName: "",
     fatherHusbandName: "",
@@ -59,8 +51,8 @@ function FillUserData({ navigation }) {
             {/* Schema====> */}
             {customerDataSchema.map((schema, idx) => {
               return schema.type === "date" ? (
-                <>
-                  <View key={idx} style={style.datePickerStyle}>
+                <View key={idx} style={{ width: "90%" }}>
+                  <View style={style.datePickerStyle}>
                     <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
                     <RNDateTimePicker
                       value={date}
@@ -80,11 +72,10 @@ function FillUserData({ navigation }) {
                       {error.dob}
                     </Text>
                   )}
-                </>
+                </View>
               ) : (
                 <TextField
                   key={idx}
-                  ref={inputRef}
                   label={schema.label}
                   type={schema.type}
                   maxValue={
