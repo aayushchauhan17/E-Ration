@@ -7,7 +7,6 @@ import { HeaderTop } from "./mainPageComp/mainPage.style";
 import React, { useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { aadhaarCardValidation, mobileValitaion } from "../Validations";
-import { useEffect } from "react";
 import { KeyboardAvoidingView } from "react-native";
 
 function FillUserData({ navigation }) {
@@ -22,6 +21,8 @@ function FillUserData({ navigation }) {
     mobileNo: "",
   });
 
+  console.log(newCustomerData);
+
   const [error, setError] = useState({
     fullName: "",
     fatherHusbandName: "",
@@ -34,9 +35,9 @@ function FillUserData({ navigation }) {
   });
 
   const [date, setDate] = useState(new Date());
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
+  // useEffect(() => {
+  //   console.log(date);
+  // }, [date]);
 
   return (
     <>
@@ -55,9 +56,11 @@ function FillUserData({ navigation }) {
                   <View style={style.datePickerStyle}>
                     <Text style={{ fontSize: 16 }}>Date of Birth * :</Text>
                     <RNDateTimePicker
-                      value={date}
+                      value={
+                        newCustomerData?.dob ? newCustomerData?.dob : new Date()
+                      }
                       onChange={(e, value) => {
-                        setDate(value);
+                        setNewCustomerData((prev) => ({ ...prev, dob: value }));
                       }}
                       mode="date"
                       dateFormat="dayofweek day month"
