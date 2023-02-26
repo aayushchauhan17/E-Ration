@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ScrollView, ToastAndroid } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
 import { customerDataSchema } from "./data/schemaData";
@@ -76,6 +76,7 @@ function FillUserData({ navigation }) {
                       }
                       onChange={(e, value) => {
                         setNewCustomerData((prev) => ({ ...prev, dob: value }));
+                        setError((prev) => ({ ...prev, dob: "" }));
                       }}
                       mode="date"
                       dateFormat="dayofweek day month"
@@ -160,7 +161,19 @@ function FillUserData({ navigation }) {
                   }
                 });
 
-                pushDataToDb("userData", newCustomerData, setDataStatus);
+                if (
+                  !(
+                    error.aadhaarCard ||
+                    error.address1 ||
+                    error.address2 ||
+                    error.dob ||
+                    error.fatherHusbandName ||
+                    error.fullName ||
+                    error.mobileNo ||
+                    error.pinCode
+                  )
+                )
+                  pushDataToDb("userData", newCustomerData, setDataStatus);
               }}
             />
           </View>

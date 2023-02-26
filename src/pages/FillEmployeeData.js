@@ -1,19 +1,21 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
 import ButtonCustom from "../components/ButtonCustom";
+import CustomModal from "../components/CustomModal";
 import TextField from "../components/TextField";
 import { aadhaarCardValidation, mobileValitaion } from "../Validations";
+import { pushDataToDb } from "./data/pushData";
 import { employeeDataSchema } from "./data/schemaData";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 
-function FillUserData({ navigation }) {
+function FillEmployeeData({ navigation }) {
   const [newEmployeeData, setNewEmployeeData] = useState({
     fullName: "",
     aadhaarCard: "",
-    dob: "",
     address1: "",
     address2: "",
     pinCode: "",
@@ -23,12 +25,31 @@ function FillUserData({ navigation }) {
   const [error, setError] = useState({
     fullName: "",
     aadhaarCard: "",
-    dob: "",
     address1: "",
     address2: "",
     pinCode: "",
     mobileNo: "",
   });
+
+  const [dataStatus, setDataStatus] = useState("");
+
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  useEffect(() => {
+    if (dataStatus?.status === "successful") {
+      setVisibleModal(true);
+      setTimeout(() => {
+        setVisibleModal(false);
+        setDataStatus("");
+      }, 1000);
+    } else if (dataStatus?.status === "unsuccessful") {
+      setVisibleModal(true);
+      setTimeout(() => {
+        setVisibleModal(false);
+        setDataStatus("");
+      }, 1000);
+    }
+  }, [dataStatus]);
 
   return (
     <>
@@ -110,16 +131,33 @@ function FillUserData({ navigation }) {
                     }
                   }
                 });
+
+                if (
+                  !(
+                    error.aadhaarCard ||
+                    error.address1 ||
+                    error.address2 ||
+                    error.fatherHusbandName ||
+                    error.fullName ||
+                    error.mobileNo ||
+                    error.pinCode
+                  )
+                ) {
+                  pushDataToDb("employeeData", newEmployeeData, setDataStatus);
+                }
               }}
             />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      {visibleModal && (
+        <CustomModal dataStatus={dataStatus} visibleModal={visibleModal} />
+      )}
     </>
   );
 }
 
-export default FillUserData;
+export default FillEmployeeData;
 
 const style = StyleSheet.create({
   container: {

@@ -8,10 +8,11 @@ export const mobileValitaion = (number) => {
 };
 
 export const aadhaarCardValidation = (number) => {
-  if (number < 12 || number > 12 || number === "") {
+  if (number.length < 12 || number.length > 12 || number === "") {
     return false;
   } else {
-    var re = /^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/;
-    return re.text(number);
+    // var re = /^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/;
+    // return re.test(number);
+    return true;
   }
 };
