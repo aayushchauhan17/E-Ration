@@ -1,13 +1,15 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView, ToastAndroid } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
 import { customerDataSchema } from "./data/schemaData";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { aadhaarCardValidation, mobileValitaion } from "../Validations";
 import { KeyboardAvoidingView } from "react-native";
+import { pushDataToDb } from "./data/pushData";
+import CustomModal from "../components/CustomModal";
 
 function FillUserData({ navigation }) {
   const [newCustomerData, setNewCustomerData] = useState({
@@ -21,7 +23,7 @@ function FillUserData({ navigation }) {
     mobileNo: "",
   });
 
-  console.log(newCustomerData);
+  const [dataStatus, setDataStatus] = useState("");
 
   const [error, setError] = useState({
     fullName: "",
@@ -34,10 +36,23 @@ function FillUserData({ navigation }) {
     mobileNo: "",
   });
 
-  const [date, setDate] = useState(new Date());
-  // useEffect(() => {
-  //   console.log(date);
-  // }, [date]);
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  useEffect(() => {
+    if (dataStatus?.status === "successful") {
+      setVisibleModal(true);
+      setTimeout(() => {
+        setVisibleModal(false);
+        setDataStatus("");
+      }, 1000);
+    } else if (dataStatus?.status === "unsuccessful") {
+      setVisibleModal(true);
+      setTimeout(() => {
+        setVisibleModal(false);
+        setDataStatus("");
+      }, 1000);
+    }
+  }, [dataStatus]);
 
   return (
     <>
@@ -144,11 +159,16 @@ function FillUserData({ navigation }) {
                     }
                   }
                 });
+
+                pushDataToDb("userData", newCustomerData, setDataStatus);
               }}
             />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      {visibleModal && (
+        <CustomModal dataStatus={dataStatus} visibleModal={visibleModal} />
+      )}
     </>
   );
 }
