@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
@@ -49,6 +50,13 @@ function LoginPage({ navigation }) {
                 });
             }}
           />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Create New Customer")}
+          >
+            <Text style={{ color: "#0280fa", marginVertical: 10 }}>
+              Create New Account?
+            </Text>
+          </TouchableOpacity>
           <ButtonCustom
             style={{ marginBottom: 20, marginTop: 10 }}
             title="Login"

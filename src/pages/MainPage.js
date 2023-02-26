@@ -1,10 +1,8 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { HeaderTop, MainContainer } from "./mainPageComp/mainPage.style";
-import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
+import { MainContainer } from "./mainPageComp/mainPage.style";
 import MainPageContent from "./mainPageComp/MainPageContent";
 import LoginPage from "./LoginPage";
-import { createStackNavigator } from "@react-navigation/stack";
 import EmployeeLoginPage from "./EmployeeLoginPage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FillUserData from "./FillUserData";
@@ -28,11 +26,11 @@ function MainPage() {
     },
     {
       name: "createNewCustomer",
-      Name: "Create New Customer ",
+      Name: "Create New Customer",
     },
     {
       name: "createNewEmployee",
-      Name: "Create New Employee ",
+      Name: "Create New Employee",
     },
   ];
 

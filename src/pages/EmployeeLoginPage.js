@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
@@ -36,6 +36,13 @@ function EmployeeLoginPage({ navigation }) {
                 });
             }}
           />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Create New Employee")}
+          >
+            <Text style={{ color: "#0280fa", marginVertical: 10 }}>
+              Create New Account?
+            </Text>
+          </TouchableOpacity>
           <ButtonCustom
             style={{ marginBottom: 20, marginTop: 10 }}
             title="Login"
