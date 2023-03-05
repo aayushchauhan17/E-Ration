@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
+import CustomModal from "../components/CustomModal";
 import TextField from "../components/TextField";
+import { getDataFirebase } from "./data/getData";
 import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 
 function LoginPage({ navigation }) {
+  const [data, setData] = useState({});
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     aadharNo: "",
     mobileNo: "",
@@ -15,6 +21,18 @@ function LoginPage({ navigation }) {
     aadharNoError: "",
     mobileNoError: "",
   });
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    } else {
+      setVisibleModal(true);
+      setTimeout(() => {
+        setVisibleModal(false);
+      }, 3000);
+    }
+  }, [data]);
+
   return (
     <>
       {/* Top Header ======> */}
@@ -28,6 +46,7 @@ function LoginPage({ navigation }) {
             label="Aadhaar Card"
             type="numeric"
             placeholder="Aadhaar Card No."
+            maxValue={12}
             error={error.aadharNoError}
             value={userData.aadharNo}
             onChange={(e) => {
@@ -43,6 +62,7 @@ function LoginPage({ navigation }) {
             placeholder="Mobile No."
             error={error.mobileNoError}
             value={userData.mobileNo}
+            maxValue={10}
             onChange={(e) => {
               if (+e.length <= 10)
                 setUserData((prev) => {
@@ -77,10 +97,19 @@ function LoginPage({ navigation }) {
                   };
                 });
               }
+
+              getDataFirebase("userData", "77364840546", setData, setLoading);
             }}
           />
         </View>
       </View>
+      {visibleModal && (
+        <CustomModal
+          dataStatus=""
+          visibleModal={visibleModal}
+          errorShow="Account Not Found"
+        />
+      )}
     </>
   );
 }

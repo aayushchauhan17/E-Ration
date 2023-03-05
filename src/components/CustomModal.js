@@ -47,7 +47,11 @@ const ModalPopUp = ({ visible, children }) => {
   );
 };
 
-function CustomModal({ visibleModal = "false", dataStatus = "" }) {
+function CustomModal({
+  visibleModal = "false",
+  dataStatus = "",
+  errorShow = "",
+}) {
   return (
     <View
       style={{
@@ -73,7 +77,11 @@ function CustomModal({ visibleModal = "false", dataStatus = "" }) {
 
         <Text style={{ marginVertical: 30, fontSize: 20, textAlign: "center" }}>
           {dataStatus?.status === "successful"
-            ? "Account successfully created!"
+            ? errorShow
+              ? errorShow
+              : "Account successfully created!"
+            : errorShow
+            ? errorShow
             : "Due to some error account not created!"}
         </Text>
       </ModalPopUp>
