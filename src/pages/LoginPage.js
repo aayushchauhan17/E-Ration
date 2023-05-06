@@ -25,8 +25,7 @@ function LoginPage({ navigation }) {
 
   useEffect(() => {
     if (data && data !== "Data Not Found") {
-      console.log("ye run ho rha hhh");
-      navigation.navigate("ProductPage");
+      navigation.navigate("ProductPage", { userData: data });
     } else if (data === "Data Not Found") {
       setVisibleModal(true);
       setTimeout(() => {

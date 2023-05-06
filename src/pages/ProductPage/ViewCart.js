@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Text, TouchableOpacity, View, Modal, ScrollView } from "react-native";
 
-const ViewCart = ({ navigation, cart }) => {
+const ViewCart = ({ navigation, cart, userData }) => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
@@ -145,7 +145,10 @@ const ViewCart = ({ navigation, cart }) => {
             <TouchableOpacity
               onPress={() => {
                 setModalShow(false);
-                navigation.navigate("ThankyouPage", { cart: cart });
+                navigation.navigate("ThankyouPage", {
+                  cart: cart,
+                  userData: userData,
+                });
               }}
             >
               <View

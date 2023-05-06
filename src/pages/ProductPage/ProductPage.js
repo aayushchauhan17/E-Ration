@@ -6,7 +6,8 @@ import { itemData } from "../data/itemsData";
 import ProductsBox from "./ProductsBox";
 import ViewCart from "./ViewCart";
 
-function ProductPage({ navigation }) {
+function ProductPage({ navigation, route }) {
+  const { userData } = route.params;
   const [cart, setCart] = useState({ items: [], totalPrice: 0 });
   return (
     <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
@@ -20,7 +21,7 @@ function ProductPage({ navigation }) {
           );
         })}
       </ScrollView>
-      <ViewCart cart={cart} navigation={navigation} />
+      <ViewCart cart={cart} navigation={navigation} userData={userData} />
     </SafeAreaView>
   );
 }
