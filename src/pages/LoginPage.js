@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { ActivityIndicator } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
@@ -50,6 +51,14 @@ function LoginPage({ navigation }) {
             error={error.aadharNoError}
             value={userData.aadharNo}
             onChange={(e) => {
+              //set error as null when uer enter the value again
+              if (error?.aadharNoError) {
+                if (e !== userData.aadharNo) {
+                  setError((prev) => {
+                    return { ...prev, aadharNoError: "" };
+                  });
+                }
+              }
               if (+e.length <= 12)
                 setUserData((prev) => {
                   return { ...prev, aadharNo: e };
@@ -64,6 +73,14 @@ function LoginPage({ navigation }) {
             value={userData.mobileNo}
             maxValue={10}
             onChange={(e) => {
+              //set error as null when user enter a new data
+              if (error?.mobileNoError) {
+                if (e !== userData.mobileNo) {
+                  setError((prev) => {
+                    return { ...prev, mobileNoError: "" };
+                  });
+                }
+              }
               if (+e.length <= 10)
                 setUserData((prev) => {
                   return { ...prev, mobileNo: e };
@@ -77,30 +94,53 @@ function LoginPage({ navigation }) {
               Create New Account?
             </Text>
           </TouchableOpacity>
-          <ButtonCustom
-            style={{ marginBottom: 20, marginTop: 10 }}
-            title="Login"
-            onClick={() => {
-              if (userData.aadharNo.length < 12) {
-                setError((prev) => {
-                  return {
-                    ...prev,
-                    aadharNoError: "Enter the 12 digit Aadhaar no.",
-                  };
-                });
-              }
-              if (userData.mobileNo.length < 10) {
-                setError((prev) => {
-                  return {
-                    ...prev,
-                    mobileNoError: "Enter the 10 digit Mobile no.",
-                  };
-                });
-              }
-
-              getDataFirebase("userData", "77364840546", setData, setLoading);
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
             }}
-          />
+          >
+            <ButtonCustom
+              style={{ marginBottom: 20, marginTop: 10 }}
+              title="Login"
+              onClick={() => {
+                if (userData.aadharNo.length < 12) {
+                  setError((prev) => {
+                    return {
+                      ...prev,
+                      aadharNoError: "Enter the 12 digit Aadhaar no.",
+                    };
+                  });
+                }
+                if (userData.mobileNo.length < 10) {
+                  setError((prev) => {
+                    return {
+                      ...prev,
+                      mobileNoError: "Enter the 10 digit Mobile no.",
+                    };
+                  });
+                }
+
+                //get data from firebase
+                if (error.aadharNoError === "" && error.mobileNoError === "") {
+                  getDataFirebase(
+                    "userData",
+                    userData.aadharNo,
+                    setData,
+                    setLoading
+                  );
+                  console.log(data, "yye h data");
+                }
+              }}
+            />
+            {loading && (
+              <ActivityIndicator
+                style={{ marginLeft: 10, paddingBottom: 5 }}
+                size="large"
+                color="#777"
+              />
+            )}
+          </View>
         </View>
       </View>
       {visibleModal && (

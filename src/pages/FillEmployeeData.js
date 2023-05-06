@@ -79,6 +79,7 @@ function FillEmployeeData({ navigation }) {
                   }
                   error={error[schema?.key]}
                   onChange={(e) => {
+                    //set error as null when user enter another value
                     if (error[schema?.key]) {
                       if (e !== newEmployeeData[schema?.key]) {
                         setError((prev) => {

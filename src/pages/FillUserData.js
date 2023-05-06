@@ -75,6 +75,8 @@ function FillUserData({ navigation }) {
                         newCustomerData?.dob ? newCustomerData?.dob : new Date()
                       }
                       onChange={(e, value) => {
+                        // let date = JSON.stringify(value).split("T")[0];
+                        // date = date.slice(1);
                         setNewCustomerData((prev) => ({ ...prev, dob: value }));
                         setError((prev) => ({ ...prev, dob: "" }));
                       }}
@@ -102,6 +104,8 @@ function FillUserData({ navigation }) {
                       ? 10
                       : schema.key === "aadhaarCard"
                       ? 12
+                      : schema.key === "pinCode"
+                      ? 6
                       : 30
                   }
                   placeholder={schema.placeholder}
@@ -172,8 +176,10 @@ function FillUserData({ navigation }) {
                     error.mobileNo ||
                     error.pinCode
                   )
-                )
+                ) {
                   pushDataToDb("userData", newCustomerData, setDataStatus);
+                  setNewCustomerData([]);
+                }
               }}
             />
           </View>
