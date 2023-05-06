@@ -145,7 +145,7 @@ const ViewCart = ({ navigation, cart }) => {
             <TouchableOpacity
               onPress={() => {
                 setModalShow(false);
-                navigation.navigate("ThankyouPage");
+                navigation.navigate("ThankyouPage", { cart: cart });
               }}
             >
               <View
@@ -165,7 +165,7 @@ const ViewCart = ({ navigation, cart }) => {
                     textAlign: "center",
                   }}
                 >
-                  Checkout
+                  Place Order
                 </Text>
               </View>
             </TouchableOpacity>
