@@ -9,30 +9,39 @@ import {
 } from "react-native";
 import { imageComp } from "../../assets/ImageComp";
 
-export function HeaderMainPage({ navigation }) {
+export function HeaderMainPage({ navigation, otherPage = false }) {
   return (
-    <View style={style.container}>
-      <TouchableOpacity
-        style={style.personIcon}
-        onPress={() => {
-          navigation.openDrawer();
-        }}
-      >
-        <Text>
-          <Ionicons size={30} name="ios-menu" />
-        </Text>
-      </TouchableOpacity>
+    <View
+      style={{
+        ...style.container,
+        justifyContent: otherPage ? "center" : "space-between",
+      }}
+    >
+      {!otherPage && (
+        <TouchableOpacity
+          style={style.personIcon}
+          onPress={() => {
+            navigation.openDrawer();
+          }}
+        >
+          <Text>
+            <Ionicons size={30} name="ios-menu" />
+          </Text>
+        </TouchableOpacity>
+      )}
 
       <View style={style.imageContainer}>
         <Image style={style.image} source={imageComp["GovLogo"]} />
         <Text style={style.rationText}>E-Ration</Text>
       </View>
 
-      <TouchableOpacity style={style.menu}>
-        <View>
-          <Ionicons size={26} name="ios-person-outline" />
-        </View>
-      </TouchableOpacity>
+      {!otherPage && (
+        <TouchableOpacity style={style.menu}>
+          <View>
+            <Ionicons size={26} name="ios-person-outline" />
+          </View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -44,7 +53,6 @@ const style = StyleSheet.create({
     height: 75,
     paddingBottom: 20,
     flexDirection: "row",
-    justifyContent: "space-between",
     position: "relative",
     // top: Platform.OS === "android" ? 20 : 0,
   },

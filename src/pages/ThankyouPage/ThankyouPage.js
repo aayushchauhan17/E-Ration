@@ -1,11 +1,13 @@
 import React from "react";
 import { Text, View, SafeAreaView, Image, ScrollView } from "react-native";
+import { HeaderMainPage } from "../mainPageComp/HeaderMainPage";
 
 function ThankyouPage({ navigation, route }) {
   const { cart, userData } = route?.params;
   console.log(userData, "nhsdbh");
   return (
     <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
+      <HeaderMainPage otherPage={true} />
       <ScrollView>
         <View>
           <View style={{ alignItems: "center" }}>

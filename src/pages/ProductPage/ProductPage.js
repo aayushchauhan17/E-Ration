@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { SafeAreaView, Text, View } from "react-native";
 import { itemData } from "../data/itemsData";
+import { HeaderMainPage } from "../mainPageComp/HeaderMainPage";
 import ProductsBox from "./ProductsBox";
 import ViewCart from "./ViewCart";
 
@@ -11,8 +12,8 @@ function ProductPage({ navigation, route }) {
   const [cart, setCart] = useState({ items: [], totalPrice: 0 });
   return (
     <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
-      <Text>hii product page..</Text>
-      <ScrollView>
+      <HeaderMainPage otherPage={true} />
+      <ScrollView style={{ marginBottom: -5 }}>
         {itemData.map((item, idx) => {
           return (
             <View key={idx}>
