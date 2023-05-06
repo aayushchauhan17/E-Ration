@@ -11,7 +11,7 @@ import { HeaderMainPage } from "./mainPageComp/HeaderMainPage";
 import { HeaderTop } from "./mainPageComp/mainPage.style";
 
 function LoginPage({ navigation }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [visibleModal, setVisibleModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
@@ -24,9 +24,10 @@ function LoginPage({ navigation }) {
   });
 
   useEffect(() => {
-    if (data) {
-      console.log(data);
-    } else {
+    if (data && data !== "Data Not Found") {
+      console.log("ye run ho rha hhh");
+      navigation.navigate("ProductPage");
+    } else if (data === "Data Not Found") {
       setVisibleModal(true);
       setTimeout(() => {
         setVisibleModal(false);
@@ -129,7 +130,6 @@ function LoginPage({ navigation }) {
                     setData,
                     setLoading
                   );
-                  console.log(data, "yye h data");
                 }
               }}
             />
