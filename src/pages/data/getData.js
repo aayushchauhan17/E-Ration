@@ -1,5 +1,5 @@
 import { db } from "../../firebase/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 export async function getDataFirebase(
   dataKey,
@@ -21,4 +21,25 @@ export async function getDataFirebase(
     setData("Data Not Found");
     setLoading(false);
   }
+}
+
+export async function getOrderDataFirebase(
+  dataKey,
+  setOrderData = () => {},
+  setIsLoading = () => {}
+) {
+  setIsLoading(true);
+  const colRef = collection(db, dataKey);
+  const docsSnap = await getDocs(colRef);
+  docsSnap.forEach((doc) => {
+    let resultArr = [doc.data()];
+    setOrderData((prev) => {
+      if (prev?.length) {
+        return [...prev, ...resultArr];
+      } else {
+        return resultArr;
+      }
+    });
+  });
+  setIsLoading(false);
 }

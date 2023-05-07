@@ -1,0 +1,133 @@
+import React, { useState } from "react";
+import { ScrollView } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+
+function ShopkeeperOrderBox({ orderData }) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={{ marginBottom: 10, alignItems: "center" }}
+    >
+      <ScrollView
+        style={{
+          marginTop: 10,
+          padding: 5,
+          backgroundColor: "#eee",
+          borderRadius: 5,
+          width: "90%",
+        }}
+      >
+        {orderData.map((item, idx) => {
+          return (
+            <View key={idx}>
+              <Product item={item} />
+            </View>
+          );
+        })}
+      </ScrollView>
+    </TouchableOpacity>
+  );
+}
+
+export default ShopkeeperOrderBox;
+
+const Product = ({ item }) => {
+  return (
+    <View style={{ display: "flex", flexDirection: "row" }}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingLeft: 5,
+        }}
+      >
+        <View style={{ width: "69%", alignItems: "flex-start" }}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              marginTop: 10,
+              marginBottom: 10,
+            }}
+          >
+            {item?.userData?.fullName}
+          </Text>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "black",
+                marginVertical: 4,
+                marginRight: 4,
+              }}
+            >
+              Address :
+            </Text>
+            <View style={{ display: "flex", flexDirection: "column" }}>
+              <Text style={{ fontSize: 14, color: "grey", marginVertical: 4 }}>
+                {item?.userData?.address1}
+              </Text>
+              <Text style={{ fontSize: 14, color: "grey", marginVertical: 4 }}>
+                {item?.userData?.address2}
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "black",
+                marginVertical: 4,
+                marginRight: 4,
+              }}
+            >
+              Pin Code :
+            </Text>
+            <Text style={{ fontSize: 14, color: "grey", marginVertical: 4 }}>
+              {item?.userData?.pinCode}
+            </Text>
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "black",
+                marginVertical: 4,
+                marginRight: 4,
+              }}
+            >
+              Mobile No. :
+            </Text>
+            <Text style={{ fontSize: 14, color: "grey", marginVertical: 4 }}>
+              {item?.userData?.mobileNo}
+            </Text>
+          </View>
+        </View>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <TouchableOpacity
+            style={{ marginVertical: 10, alignSelf: "center" }}
+            onPress={() => {}}
+          >
+            <View
+              style={{
+                minWidth: 70,
+                paddingHorizontal: 7,
+                paddingVertical: 6,
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 5,
+              }}
+            >
+              <Text style={{ fontSize: 17, fontWeight: "500" }}>
+                See Details
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
