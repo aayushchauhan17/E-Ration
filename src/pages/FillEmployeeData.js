@@ -75,6 +75,8 @@ function FillEmployeeData({ navigation }) {
                       ? 10
                       : schema.key === "aadhaarCard"
                       ? 12
+                      : schema.key === "pinCode"
+                      ? 6
                       : 30
                   }
                   error={error[schema?.key]}
@@ -145,6 +147,7 @@ function FillEmployeeData({ navigation }) {
                   )
                 ) {
                   pushDataToDb("employeeData", newEmployeeData, setDataStatus);
+                  setNewEmployeeData([]);
                 }
               }}
             />

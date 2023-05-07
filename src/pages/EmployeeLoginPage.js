@@ -23,7 +23,7 @@ function EmployeeLoginPage({ navigation }) {
 
   useEffect(() => {
     if (data && data !== "Data Not Found") {
-      navigation.navigate("ProductPage", { userData: data });
+      navigation.navigate("ShopkeeperProductPage", { userData: data });
     } else if (data === "Data Not Found") {
       setVisibleModal(true);
       setTimeout(() => {

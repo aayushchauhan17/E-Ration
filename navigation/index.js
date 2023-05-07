@@ -6,6 +6,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import MainPage from "../src/pages/MainPage";
 import ProductPage from "../src/pages/ProductPage/ProductPage";
+import ShopkeeperProductPage from "../src/pages/ShopkeeperProductPage/ShopkeeperProductPage";
 import ThankyouPage from "../src/pages/ThankyouPage/ThankyouPage";
 
 export default function Navigation({ colorScheme }) {
@@ -43,6 +44,13 @@ function RootNavigator() {
           headerShown: false,
         }}
         component={ThankyouPage}
+      />
+      <Stack.Screen
+        name="ShopkeeperProductPage"
+        options={{
+          headerShown: false,
+        }}
+        component={ShopkeeperProductPage}
       />
     </Stack.Navigator>
   );
