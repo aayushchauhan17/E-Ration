@@ -122,7 +122,12 @@ function LoginPage({ navigation }) {
                 }
 
                 //get data from firebase
-                if (error.aadharNoError === "" && error.mobileNoError === "") {
+                if (
+                  error.aadharNoError === "" &&
+                  error.mobileNoError === "" &&
+                  userData.aadharNo &&
+                  userData.mobileNo
+                ) {
                   getDataFirebase(
                     "userData",
                     userData.aadharNo,

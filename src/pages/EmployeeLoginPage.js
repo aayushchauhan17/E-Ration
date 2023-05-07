@@ -120,7 +120,12 @@ function EmployeeLoginPage({ navigation }) {
                 }
 
                 //get data from firebase
-                if (error.aadharNoError === "" && error.mobileNoError === "") {
+                if (
+                  error.aadharNoError === "" &&
+                  error.mobileNoError === "" &&
+                  userData.aadharNo &&
+                  userData.mobileNo
+                ) {
                   getDataFirebase(
                     "employeeData",
                     userData.aadharNo,
