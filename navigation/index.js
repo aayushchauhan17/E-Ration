@@ -8,6 +8,7 @@ import MainPage from "../src/pages/MainPage";
 import ProductPage from "../src/pages/ProductPage/ProductPage";
 import ShopkeeperProductPage from "../src/pages/ShopkeeperProductPage/ShopkeeperProductPage";
 import ThankyouPage from "../src/pages/ThankyouPage/ThankyouPage";
+import DeliveryPage from "../src/pages/DeliveryPage/DeliveryPage";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -51,6 +52,13 @@ function RootNavigator() {
           headerShown: false,
         }}
         component={ShopkeeperProductPage}
+      />
+      <Stack.Screen
+        name="DeliveryPage"
+        options={{
+          headerShown: false,
+        }}
+        component={DeliveryPage}
       />
     </Stack.Navigator>
   );

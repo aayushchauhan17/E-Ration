@@ -38,7 +38,7 @@ function ShopkeeperProductPage({ navigation, route }) {
     return (
       <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
         <HeaderMainPage otherPage={true} />
-        <ShopkeeperOrderBox orderData={orderData} />
+        <ShopkeeperOrderBox orderData={orderData} navigation={navigation} />
       </SafeAreaView>
     );
   }

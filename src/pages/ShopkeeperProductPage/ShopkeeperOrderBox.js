@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
-function ShopkeeperOrderBox({ orderData }) {
+function ShopkeeperOrderBox({ orderData, navigation }) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -20,7 +20,7 @@ function ShopkeeperOrderBox({ orderData }) {
         {orderData.map((item, idx) => {
           return (
             <View key={idx}>
-              <Product item={item} />
+              <Product item={item} navigation={navigation} />
             </View>
           );
         })}
@@ -31,7 +31,7 @@ function ShopkeeperOrderBox({ orderData }) {
 
 export default ShopkeeperOrderBox;
 
-const Product = ({ item }) => {
+const Product = ({ item, navigation }) => {
   return (
     <View style={{ display: "flex", flexDirection: "row" }}>
       <View
@@ -108,7 +108,9 @@ const Product = ({ item }) => {
         <View style={{ alignItems: "center", justifyContent: "center" }}>
           <TouchableOpacity
             style={{ marginVertical: 10, alignSelf: "center" }}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("DeliveryPage", { oderDeliverData: item });
+            }}
           >
             <View
               style={{
