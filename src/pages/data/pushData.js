@@ -11,3 +11,11 @@ export async function pushDataToDb(dataId, data, setDataStatus = () => {}) {
   }
   return status;
 }
+
+export async function pushOrderDataToDb(dataId, data) {
+  try {
+    await setDoc(doc(db, dataId, data?.userData?.aadhaarCard), data);
+  } catch (e) {
+    console.log(e);
+  }
+}

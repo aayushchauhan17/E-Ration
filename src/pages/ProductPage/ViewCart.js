@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Text, TouchableOpacity, View, Modal, ScrollView } from "react-native";
+import { pushOrderDataToDb } from "../data/pushData";
 
 const ViewCart = ({ navigation, cart, userData }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -148,6 +149,10 @@ const ViewCart = ({ navigation, cart, userData }) => {
                 navigation.navigate("ThankyouPage", {
                   cart: cart,
                   userData: userData,
+                });
+                pushOrderDataToDb("orderData", {
+                  userData: userData,
+                  cartData: cart,
                 });
               }}
             >
