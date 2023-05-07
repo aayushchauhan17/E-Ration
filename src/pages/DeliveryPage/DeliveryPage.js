@@ -3,6 +3,8 @@ import { SafeAreaView, Text, View } from "react-native";
 import { HeaderMainPage } from "../mainPageComp/HeaderMainPage";
 
 function DeliveryPage({ navigation, route }) {
+  const { oderDeliverData } = route.params;
+  console.log(oderDeliverData);
   return (
     <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
       <HeaderMainPage otherPage={true} />
