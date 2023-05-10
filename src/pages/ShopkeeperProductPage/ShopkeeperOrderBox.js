@@ -10,16 +10,21 @@ function ShopkeeperOrderBox({ orderData, navigation }) {
     >
       <ScrollView
         style={{
-          marginTop: 10,
-          padding: 5,
-          backgroundColor: "#eee",
-          borderRadius: 5,
           width: "90%",
         }}
       >
         {orderData.map((item, idx) => {
           return (
-            <View key={idx}>
+            <View
+              key={idx}
+              style={{
+                marginBottom: 10,
+                backgroundColor: "#eee",
+                marginTop: 10,
+                padding: 5,
+                borderRadius: 5,
+              }}
+            >
               <Product item={item} navigation={navigation} />
             </View>
           );

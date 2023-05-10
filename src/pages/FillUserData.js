@@ -46,18 +46,9 @@ function FillUserData({ navigation, route }) {
     faceData: "",
   });
 
-  useEffect(() => {
-    if (error.faceData) {
-      if (faceData?.faceID) {
-        setError((prev) => {
-          return {
-            ...prev,
-            faceData: "",
-          };
-        });
-      }
-    }
-  }, [faceData]);
+  console.log(faceData);
+
+  useEffect(() => {}, [faceData]);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -131,6 +122,12 @@ function FillUserData({ navigation, route }) {
                     <TouchableOpacity
                       style={{ marginVertical: 10, alignSelf: "center" }}
                       onPress={() => {
+                        setError((prev) => {
+                          return {
+                            ...prev,
+                            faceData: "",
+                          };
+                        });
                         navigation.navigate("FaceDetection");
                       }}
                     >
@@ -251,9 +248,9 @@ function FillUserData({ navigation, route }) {
                     error.mobileNo ||
                     error.pinCode ||
                     error.faceData
-                  ) &&
-                  faceData?.faceID
+                  )
                 ) {
+                  console.log(faceData);
                   pushDataToDb(
                     "userData",
                     { ...newCustomerData, faceData },
