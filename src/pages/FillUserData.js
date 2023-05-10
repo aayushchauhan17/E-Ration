@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
 import { customerDataSchema } from "./data/schemaData";
@@ -11,7 +17,7 @@ import { KeyboardAvoidingView } from "react-native";
 import { pushDataToDb } from "./data/pushData";
 import CustomModal from "../components/CustomModal";
 
-function FillUserData({ navigation }) {
+function FillUserData({ navigation, route }) {
   const [newCustomerData, setNewCustomerData] = useState({
     fullName: "",
     fatherHusbandName: "",
@@ -21,7 +27,10 @@ function FillUserData({ navigation }) {
     address2: "",
     pinCode: "",
     mobileNo: "",
+    faceData: {},
   });
+
+  const faceData = route?.params?.faceData ? route?.params?.faceData : {};
 
   const [dataStatus, setDataStatus] = useState("");
 
@@ -34,13 +43,28 @@ function FillUserData({ navigation }) {
     address2: "",
     pinCode: "",
     mobileNo: "",
+    faceData: "",
   });
+
+  useEffect(() => {
+    if (error.faceData) {
+      if (faceData?.faceID) {
+        setError((prev) => {
+          return {
+            ...prev,
+            faceData: "",
+          };
+        });
+      }
+    }
+  }, [faceData]);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
   useEffect(() => {
     if (dataStatus?.status === "successful") {
       setVisibleModal(true);
+      setNewCustomerData([]);
       setTimeout(() => {
         setVisibleModal(false);
         setDataStatus("");
@@ -91,6 +115,48 @@ function FillUserData({ navigation }) {
                   {error?.dob && (
                     <Text style={{ color: "red", textAlign: "left" }}>
                       {error.dob}
+                    </Text>
+                  )}
+                </View>
+              ) : schema.type === "FaceDetection" ? (
+                <View key={idx} style={{ width: "90%" }}>
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      ...style.datePickerStyle,
+                    }}
+                  >
+                    <Text style={{ fontSize: 16 }}>Take Face Image * :</Text>
+                    <TouchableOpacity
+                      style={{ marginVertical: 10, alignSelf: "center" }}
+                      onPress={() => {
+                        navigation.navigate("FaceDetection");
+                      }}
+                    >
+                      <View
+                        style={{
+                          minWidth: 70,
+                          paddingHorizontal: 7,
+                          paddingVertical: 6,
+                          backgroundColor: newCustomerData?.faceData?.faceID
+                            ? "lightgreen"
+                            : "white",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: 5,
+                          marginRight: 30,
+                        }}
+                      >
+                        <Text style={{ fontSize: 17, fontWeight: "500" }}>
+                          Take Image
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  {error?.faceData && (
+                    <Text style={{ color: "red", textAlign: "left" }}>
+                      {error.faceData}
                     </Text>
                   )}
                 </View>
@@ -163,6 +229,15 @@ function FillUserData({ navigation }) {
                       });
                     }
                   }
+                  if (dataKey === "faceData") {
+                    if (!faceData?.faceID) {
+                      setError((prev) => {
+                        let temp = {};
+                        temp[dataKey] = "This field is required.";
+                        return { ...prev, ...temp };
+                      });
+                    }
+                  }
                 });
 
                 if (
@@ -174,11 +249,16 @@ function FillUserData({ navigation }) {
                     error.fatherHusbandName ||
                     error.fullName ||
                     error.mobileNo ||
-                    error.pinCode
-                  )
+                    error.pinCode ||
+                    error.faceData
+                  ) &&
+                  faceData?.faceID
                 ) {
-                  pushDataToDb("userData", newCustomerData, setDataStatus);
-                  setNewCustomerData([]);
+                  pushDataToDb(
+                    "userData",
+                    { ...newCustomerData, faceData },
+                    setDataStatus
+                  );
                 }
               }}
             />

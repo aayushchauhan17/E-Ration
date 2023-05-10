@@ -9,6 +9,7 @@ import ProductPage from "../src/pages/ProductPage/ProductPage";
 import ShopkeeperProductPage from "../src/pages/ShopkeeperProductPage/ShopkeeperProductPage";
 import ThankyouPage from "../src/pages/ThankyouPage/ThankyouPage";
 import DeliveryPage from "../src/pages/DeliveryPage/DeliveryPage";
+import FaceDetection from "../src/pages/FaceDetection/FaceDetection";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -59,6 +60,13 @@ function RootNavigator() {
           headerShown: false,
         }}
         component={DeliveryPage}
+      />
+      <Stack.Screen
+        name="FaceDetection"
+        options={{
+          headerShown: false,
+        }}
+        component={FaceDetection}
       />
     </Stack.Navigator>
   );

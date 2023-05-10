@@ -63,6 +63,12 @@ export const customerDataSchema = [
     key: "dob",
   },
   {
+    label: "FaceDetection",
+    type: "FaceDetection",
+    placeholder: "FaceDetection",
+    key: "FaceDetection",
+  },
+  {
     label: "Address line 1 *",
     type: "text",
     placeholder: "House No./Street/Village",
