@@ -46,10 +46,6 @@ function FillUserData({ navigation, route }) {
     faceData: "",
   });
 
-  console.log(faceData);
-
-  useEffect(() => {}, [faceData]);
-
   const [visibleModal, setVisibleModal] = useState(false);
 
   useEffect(() => {
@@ -128,7 +124,9 @@ function FillUserData({ navigation, route }) {
                             faceData: "",
                           };
                         });
-                        navigation.navigate("FaceDetection");
+                        navigation.navigate("FaceDetection", {
+                          returnPage: "Create New Customer",
+                        });
                       }}
                     >
                       <View
@@ -227,7 +225,7 @@ function FillUserData({ navigation, route }) {
                     }
                   }
                   if (dataKey === "faceData") {
-                    if (!faceData?.faceID) {
+                    if (!(faceData?.faceID || faceData)) {
                       setError((prev) => {
                         let temp = {};
                         temp[dataKey] = "This field is required.";

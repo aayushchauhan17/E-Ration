@@ -8,7 +8,12 @@ import { TouchableOpacity } from "react-native";
 
 function DeliveryPage({ navigation, route }) {
   const { oderDeliverData } = route.params;
-  console.log(oderDeliverData);
+  const faceDataValidation = route?.params?.faceDataValidation
+    ? route?.params?.faceDataValidation
+    : "NotValidate";
+
+  console.log(faceDataValidation);
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
       <HeaderMainPage otherPage={true} />
@@ -28,7 +33,14 @@ function DeliveryPage({ navigation, route }) {
           <Text style={{ fontSize: 16, fontWeight: "400" }}>
             Deliver this product :{" "}
           </Text>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("FaceDetection", {
+                returnPage: "DeliveryPage",
+                userFaceData: oderDeliverData,
+              });
+            }}
+          >
             <View
               style={{
                 width: 150,
@@ -41,7 +53,9 @@ function DeliveryPage({ navigation, route }) {
               }}
             >
               <Text style={{ fontSize: 17, fontWeight: "500" }}>
-                Deliver Now
+                {faceDataValidation === "Successful"
+                  ? "Delivered"
+                  : "Deliver Now"}
               </Text>
             </View>
           </TouchableOpacity>

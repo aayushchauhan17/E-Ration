@@ -3,7 +3,11 @@ import React from "react";
 import { Camera } from "expo-camera";
 import * as FaceDetector from "expo-face-detector";
 
-export default function FaceDetection({ navigation }) {
+export default function FaceDetection({ navigation, route }) {
+  const { returnPage } = route?.params;
+  const oderDeliverData = route?.params?.userFaceData
+    ? route?.params?.userFaceData
+    : {};
   const [hasPermission, setHasPermission] = React.useState();
   const [faceData, setFaceData] = React.useState([]);
 
@@ -12,6 +16,17 @@ export default function FaceDetection({ navigation }) {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
+  }, []);
+
+  React.useEffect(() => {
+    if (returnPage === "DeliveryPage") {
+      setTimeout(() => {
+        navigation.navigate("DeliveryPage", {
+          oderDeliverData: oderDeliverData,
+          faceDataValidation: "Successful",
+        });
+      }, 3000);
+    }
   }, []);
 
   if (hasPermission === false) {
@@ -27,7 +42,7 @@ export default function FaceDetection({ navigation }) {
       );
     } else {
       return faceData.map((face, index) => {
-        return (
+        return returnPage === "Create New Customer" ? (
           <TouchableOpacity
             key={index}
             style={{
@@ -36,7 +51,7 @@ export default function FaceDetection({ navigation }) {
               marginTop: 550,
             }}
             onPress={() => {
-              navigation.navigate("Create New Customer", {
+              navigation.navigate(returnPage, {
                 faceData: face,
               });
             }}
@@ -58,6 +73,8 @@ export default function FaceDetection({ navigation }) {
               <Text style={{ fontSize: 17, fontWeight: "500" }}>Click</Text>
             </View>
           </TouchableOpacity>
+        ) : (
+          <View key={index}></View>
         );
       });
     }
