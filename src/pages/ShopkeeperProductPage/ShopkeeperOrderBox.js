@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
-import { Text, TouchableOpacity, View } from "react-native";
+
+import { Text, TouchableOpacity, View, ScrollView } from "react-native";
 
 function ShopkeeperOrderBox({ orderData, navigation }) {
   return (
-    <TouchableOpacity
+    <View
       activeOpacity={0.8}
-      style={{ marginBottom: 10, alignItems: "center" }}
+      style={{ marginBottom: 10, alignItems: "center", paddingBottom: 60 }}
     >
       <ScrollView
         style={{
@@ -30,7 +30,7 @@ function ShopkeeperOrderBox({ orderData, navigation }) {
           );
         })}
       </ScrollView>
-    </TouchableOpacity>
+    </View>
   );
 }
 

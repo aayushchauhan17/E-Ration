@@ -12,6 +12,7 @@ export default function FaceDetection({ navigation, route }) {
   const [faceData, setFaceData] = React.useState([]);
   const [camera, setCamera] = React.useState(null);
   const [imageUri, setImageUri] = React.useState(null);
+  const [showProcessing, setShowProcessing] = React.useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -25,28 +26,53 @@ export default function FaceDetection({ navigation, route }) {
       const data = await camera.takePictureAsync(null);
       //   console.log(data.uri);
       setImageUri(data.uri);
-      navigation.navigate(returnPage, {
-        faceData: { ...face, imageUri: data.uri },
-      });
+      if (returnPage === "DeliveryPage") {
+        setShowProcessing(true);
+        setTimeout(() => {
+          navigation.navigate("DeliveryPage", {
+            oderDeliverData: oderDeliverData,
+            faceDataValidation: "Successful",
+          });
+        }, 8000);
+      } else {
+        navigation.navigate(returnPage, {
+          faceData: { ...face, imageUri: data.uri },
+        });
+      }
     }
   };
 
-  React.useEffect(() => {
-    if (returnPage === "DeliveryPage") {
-      setTimeout(() => {
-        navigation.navigate("DeliveryPage", {
-          oderDeliverData: oderDeliverData,
-          faceDataValidation: "Successful",
-        });
-      }, 3000);
-    }
-  }, []);
+  //   React.useEffect(() => {
+  //     if (returnPage === "DeliveryPage") {
+  //       faceReco(oderDeliverData?.userData?.faceData?.imageUri).then(() => {
+  //         console.log("Finished processing file.");
+  //         // navigation.navigate("DeliveryPage", {
+  //         //   oderDeliverData: oderDeliverData,
+  //         //   faceDataValidation: "Successful",
+  //         // });
+  //       });
+  //       //   setTimeout(() => {
+  //       //     navigation.navigate("DeliveryPage", {
+  //       //       oderDeliverData: oderDeliverData,
+  //       //       faceDataValidation: "Successful",
+  //       //     });
+  //       //   }, 3000);
+  //     }
+  //   }, []);
 
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
 
   function getFaceDataView() {
+    if (showProcessing) {
+      return (
+        <View style={styles.faces}>
+          <Text style={styles.faceDesc}>Processing....</Text>
+        </View>
+      );
+    }
+
     if (faceData.length === 0) {
       return (
         <View style={styles.faces}>
@@ -55,7 +81,8 @@ export default function FaceDetection({ navigation, route }) {
       );
     } else {
       return faceData.map((face, index) => {
-        return returnPage === "Create New Customer" ? (
+        return returnPage === "Create New Customer" ||
+          returnPage === "DeliveryPage" ? (
           <TouchableOpacity
             key={index}
             style={{
