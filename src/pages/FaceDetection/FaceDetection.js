@@ -10,6 +10,8 @@ export default function FaceDetection({ navigation, route }) {
     : {};
   const [hasPermission, setHasPermission] = React.useState();
   const [faceData, setFaceData] = React.useState([]);
+  const [camera, setCamera] = React.useState(null);
+  const [imageUri, setImageUri] = React.useState(null);
 
   React.useEffect(() => {
     (async () => {
@@ -17,6 +19,17 @@ export default function FaceDetection({ navigation, route }) {
       setHasPermission(status === "granted");
     })();
   }, []);
+
+  const takePicture = async (face) => {
+    if (camera) {
+      const data = await camera.takePictureAsync(null);
+      //   console.log(data.uri);
+      setImageUri(data.uri);
+      navigation.navigate(returnPage, {
+        faceData: { ...face, imageUri: data.uri },
+      });
+    }
+  };
 
   React.useEffect(() => {
     if (returnPage === "DeliveryPage") {
@@ -51,9 +64,7 @@ export default function FaceDetection({ navigation, route }) {
               marginTop: 550,
             }}
             onPress={() => {
-              navigation.navigate(returnPage, {
-                faceData: face,
-              });
+              takePicture(face);
             }}
           >
             <View
@@ -89,6 +100,7 @@ export default function FaceDetection({ navigation, route }) {
       type={Camera.Constants.Type.front}
       style={styles.camera}
       onFacesDetected={handleFacesDetected}
+      ref={(ref) => setCamera(ref)}
       faceDetectorSettings={{
         mode: FaceDetector.FaceDetectorMode.fast,
         detectLandmarks: FaceDetector.FaceDetectorLandmarks.none,

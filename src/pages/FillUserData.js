@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import ButtonCustom from "../components/ButtonCustom";
 import TextField from "../components/TextField";
@@ -64,6 +65,8 @@ function FillUserData({ navigation, route }) {
       }, 1000);
     }
   }, [dataStatus]);
+
+  console.log(faceData);
 
   return (
     <>
@@ -149,6 +152,18 @@ function FillUserData({ navigation, route }) {
                       </View>
                     </TouchableOpacity>
                   </View>
+                  {faceData?.imageUri && (
+                    <Image
+                      source={{ uri: faceData?.imageUri }}
+                      style={{
+                        flex: 1,
+                        width: 100,
+                        height: 100,
+                        alignSelf: "flex-end",
+                        marginRight: 55,
+                      }}
+                    />
+                  )}
                   {error?.faceData && (
                     <Text style={{ color: "red", textAlign: "left" }}>
                       {error.faceData}
