@@ -252,18 +252,17 @@ function FillUserData({ navigation, route }) {
 
                 if (
                   !(
-                    error.aadhaarCard ||
-                    error.address1 ||
-                    error.address2 ||
-                    error.dob ||
-                    error.fatherHusbandName ||
-                    error.fullName ||
-                    error.mobileNo ||
-                    error.pinCode ||
-                    error.faceData
+                    newCustomerData.fullName === "" ||
+                    newCustomerData.fatherHusbandName === "" ||
+                    newCustomerData.aadhaarCard === "" ||
+                    newCustomerData.dob === "" ||
+                    newCustomerData.address1 === "" ||
+                    newCustomerData.address2 === "" ||
+                    newCustomerData.pinCode === "" ||
+                    newCustomerData.mobileNo === "" ||
+                    newCustomerData.faceData.imageUri === ""
                   )
                 ) {
-                  console.log(faceData);
                   pushDataToDb(
                     "userData",
                     { ...newCustomerData, faceData },
