@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Image } from "react-native";
+import { Image, ImageBackground } from "react-native";
 import { imageComp } from "../../assets/ImageComp";
 import ButtonCustom from "../../components/ButtonCustom";
 import { HeaderMainPage } from "./HeaderMainPage";
@@ -32,7 +32,27 @@ function MainPageContent({ navigation }) {
 
       <ImgContainer>
         <ImageContainer>
-          <Image source={imageComp[`${imageSelect + 1}`]} />
+          <ImageBackground
+            style={{ width: "100%", height: 670 }}
+            resizeMode="cover"
+            source={imageComp[`${imageSelect + 1}`]}
+          >
+            <ButtonContainer>
+              <ButtonCustom
+                style={{ marginBottom: 30, marginTop: 20 }}
+                title="Customer Login"
+                onClick={() => {
+                  navigation.navigate("Customer Login");
+                }}
+              />
+              <ButtonCustom
+                title="Employee Login"
+                onClick={() => {
+                  navigation.navigate("Employee Login");
+                }}
+              />
+            </ButtonContainer>
+          </ImageBackground>
         </ImageContainer>
         <ImageDot>
           <ImageBar
@@ -45,21 +65,6 @@ function MainPageContent({ navigation }) {
           />
         </ImageDot>
       </ImgContainer>
-      <ButtonContainer>
-        <ButtonCustom
-          style={{ marginBottom: 30, marginTop: 20 }}
-          title="Customer Login"
-          onClick={() => {
-            navigation.navigate("loginPage");
-          }}
-        />
-        <ButtonCustom
-          title="Employee Login"
-          onClick={() => {
-            navigation.navigate("employeeLoginPage");
-          }}
-        />
-      </ButtonContainer>
     </StackView>
   );
 }

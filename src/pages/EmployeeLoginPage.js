@@ -40,7 +40,7 @@ function EmployeeLoginPage({ navigation }) {
       {/* =======> */}
       <View style={style.container}>
         <View style={style.content}>
-          <Text style={style.loginText}>Shopkeeper Login</Text>
+          <Text style={style.loginText}>Employee Login</Text>
           <TextField
             label="Aadhaar Card"
             type="numeric"

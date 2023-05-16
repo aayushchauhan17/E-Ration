@@ -6,13 +6,12 @@ export const MainContainer = styled.View`
 `;
 
 export const ImageContainer = styled.View`
-  width: 96%;
+  width: 100%;
   background-color: #eee;
   align-self: center;
-  height: 200px;
   overflow: hidden;
   border-radius: 4px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 `;
 
 export const ImageDot = styled.View`
@@ -22,11 +21,12 @@ export const ImageDot = styled.View`
   z-index: 1;
   position: relative;
   margin-top: 5px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 `;
 
 export const ButtonContainer = styled.View`
   align-items: center;
+  margin-top: 400px;
 `;
 
 export const HeaderTop = styled.View`
@@ -45,6 +45,7 @@ export const ImgContainer = styled.View`
   align-self: center;
   border-radius: 8px;
   margin-top: -10px;
+  height: 100%;
 `;
 
 export const ImageBar = styled.View`
